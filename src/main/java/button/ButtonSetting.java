@@ -20,12 +20,15 @@ public class ButtonSetting {
         List<KeyboardRow> keyboardList = new ArrayList<>();
         KeyboardRow keyboard1 = new KeyboardRow();
         KeyboardRow keyboard2 = new KeyboardRow();
+        KeyboardRow keyboard3 = new KeyboardRow();
 
-        keyboard1.add(new KeyboardButton("Курс Доллара"));
-        keyboard2.add(new KeyboardButton("Курс Євро"));
+        keyboard1.add(new KeyboardButton("Курс Доллара\uD83D\uDCB5"));
+        keyboard2.add(new KeyboardButton("Курс Євро\uD83D\uDCB6"));
+        keyboard3.add(new KeyboardButton("Bitcoin"));
 
         keyboardList.add(keyboard1);
         keyboardList.add(keyboard2);
+        keyboardList.add(keyboard3);
 
 
         replyKeyboardMarkup.setKeyboard(keyboardList);

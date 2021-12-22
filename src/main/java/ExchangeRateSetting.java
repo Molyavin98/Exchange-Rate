@@ -4,18 +4,52 @@ import org.telegram.telegrambots.api.objects.Message;
 import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
+import parser.Bitcoin;
+import parser.EUR;
+import parser.Money;
+import parser.USD;
+
+import java.io.IOException;
 
 public class ExchangeRateSetting extends TelegramLongPollingBot {
 
     ButtonSetting categoryButton = new ButtonSetting();
-
+    Money money;
 
     @Override
     public void onUpdateReceived(Update update) {
         Message message = update.getMessage();
 
-        if (message.hasText()){
-            sendMsg(message, "КУРС Долараа такий-то");
+
+        switch (message.getText()){
+
+            case "/start":
+                sendMsg(message, "Привіт, "+message.getChat().getUserName());
+                break;
+
+            case "Курс Доллара\uD83D\uDCB5":
+                money = new USD();
+                try {
+                    sendMsg(message,money.processing());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "Курс Євро\uD83D\uDCB6":
+                money = new EUR();
+                try {
+                    sendMsg(message,money.processing());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "Bitcoin":
+                money = new Bitcoin();
+                try {
+                    sendMsg(message,money.processing());
+                } catch (IOException e) {
+                }
+                break;
         }
     }
 
